@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 
-// struct zenklas
 // struct kolekcionierius
 // duomenu sukurimas
 // ivedimas is failo
@@ -12,6 +11,20 @@
 // main
 
 using namespace std;
+
+struct Zenklas
+{
+    string pavadinimas;
+    int metai;
+    double kaina;
+};
+
+struct Kolekcionierius
+{
+    string varPav;
+    string pavadinimas;
+    int kiekis;
+};
 
 int main()
 {
