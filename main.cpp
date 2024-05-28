@@ -1,14 +1,12 @@
 #include <bits/stdc++.h>
 
-// struct kolekcionierius
-// duomenu sukurimas
-// ivedimas is failo
-// pradiniai i faila
-// rezultatai i faila
-// populiariausių pašto ženklų sąrašo be pasikartojimų funkciją
-// funkcija, kuri suranda asmenis, neturinčius nurodyto pašto ženklo ir surašo juos į naują sąrašą.
-// rikiavimas
-// main
+// duomenu sukurimas (Haroldas)
+// ivedimas is failo (Haroldas)
+// pradiniai i faila (Motiejus)
+// rezultatai i faila (Motiejus)
+// populiariausių pašto ženklų sąrašo be pasikartojimų funkciją (Augustas)
+// funkcija, kuri suranda asmenis, neturinčius nurodyto pašto ženklo ir surašo juos į naują sąrašą. (Emilis)
+// rikiavimas (Augustas)
 
 using namespace std;
 
