@@ -20,8 +20,9 @@ struct Zenklas
 struct Kolekcionierius
 {
     string varPav;
-    string pavadinimas;
-    int kiekis;
+    string pavadinimas[256];
+    int kiekis[256];
+    int nr; // kolekcionieriaus turimų skirtingų pašto ženklų numeris
 };
 
 int main()
