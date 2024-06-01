@@ -1,7 +1,7 @@
 6
 Zenklas15           1950 80.5
 Zenklas23           2001 50.3
-Zenklas34           1920 655,5
+Zenklas34           1920 655.5
 Zenklas49           1980 100
-Zenklas53           1998 50,7
-Zenklas67           2012 20,3
+Zenklas53           1998 50.7
+Zenklas67           2012 20.3
