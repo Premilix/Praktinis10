@@ -1,0 +1,5 @@
+4
+Zenklas18           1895 750.6
+Zenklas23           1997 50.7
+Zenklas34           2016 15.3
+Zenklas47           1940 340.7
