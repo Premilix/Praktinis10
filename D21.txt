@@ -1,0 +1,6 @@
+5
+Zenklas17           1990 60.5
+Zenklas21           2000 40.7
+Zenklas39           1950 200.3
+Zenklas45           1981 150
+Zenklas53           1973 125.6
