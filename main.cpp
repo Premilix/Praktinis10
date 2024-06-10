@@ -36,13 +36,18 @@ int main()
     Kolekcionierius K[100];
     ifstream inZ("DuomenysZ.txt");
     ifstream inK("DuomenysK.txt");
-    ofstream out("Rezultatai.txt");
+    ofstream out("Pradiniai.txt");
+    ofstream outX("Rezultatai.txt");
+    
 
     int zenkluSkaicius;
     int kolekcionieriuSkaicius;
 
     SkaitytiZenklus(inZ, Z, zenkluSkaicius);
     SkaitytiKolekcionierius(inK, K, kolekcionieriuSkaicius);
+    PradiniaiIFaila(out, Z, zenkluSkaicius, K, kolekcionieriuSkaicius);
+    ///RezultataiIFaila(outX, Z, zenkluSkaicius, K, kolekcionieriuSkaicius);
+    
 }
 
 void SkaitytiZenklus(ifstream& in, Zenklas Z[], int &zenkluSkaicius) {
@@ -75,6 +80,32 @@ void SkaitytiKolekcionierius(ifstream& in, Kolekcionierius K[], int &kolekcionie
         in.ignore();
     }
 }
+void PradiniaiIFaila(ofstream& out, Zenklas Z[], int zenkluSkaicius, Kolekcionierius K[], int kolekcionieriuSkaicius) {
+    
+    out << "Pradiniai duomenys\n";
+    out << "D1 duomenys\n";
+    out << "Pavadinimas             Metai Kaina\n";
+    for (int i = 0; i < zenkluSkaicius; ++i) {
+        out << left << setw(20) << Z[i].pavadinimas << " ";
+        out << Z[i].metai << " " << fixed << setprecision(1) << Z[i].kaina << "\n";
+    }
+
+    
+    out << "\nD2 duomenys\n";
+    out << "Pavadinimas           Pavardė, vardas       Kiekis\n";
+    for (int i = 0; i < kolekcionieriuSkaicius; ++i) {
+        out << left << setw(20) << K[i].varPav << " ";
+        out << left << setw(20) << K[i].pavadinimas << " ";
+        out << K[i].kiekis << "\n";
+    }
+}
+void RezultataiIFaila(ofstream& outX, Zenklas Z[], int zenkluSkaicius, Kolekcionierius K[], int kolekcionieriuSkaicius){
+    outX<<"Rezultatai:\n";
+    outX<<"Populiariausi ženklai \n";
+    ////nezinau kaip atrodo populiariausiu zneklu radimo funkcija
+}
+
+
 
 /*
 // funkcija, kuri suranda asmenis, neturinčius nurodyto pašto ženklo, ir surašo juos į naują sąrašą
