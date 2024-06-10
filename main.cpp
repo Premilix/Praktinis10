@@ -22,13 +22,11 @@ struct Kolekcionierius
     string varPav;
     string pavadinimas;
     int kiekis;
-
 };
 
 void SkaitytiZenklus(ifstream& in, Zenklas Z[], int &zenkluSkaicius);
 void SkaitytiKolekcionierius(ifstream& in, Kolekcionierius K[], int &kolekcionieriuSkaicius);
 void Neturintys(Kolekcionierius K[], Kolekcionierius Naujas[], int n, int &m, Zenklas zenklas);
-bool ArTuri(Kolekcionierius k, Zenklas zenklas);
 
 int main()
 {
@@ -76,21 +74,30 @@ void SkaitytiKolekcionierius(ifstream& in, Kolekcionierius K[], int &kolekcionie
     }
 }
 
-/*
 // funkcija, kuri suranda asmenis, neturinčius nurodyto pašto ženklo, ir surašo juos į naują sąrašą
 void Neturintys(Kolekcionierius K[], Kolekcionierius Naujas[], int n, int &m, Zenklas zenklas) {
     m = 0;
+    int temp = 0;
+    Kolekcionierius Temp[100];
+    
+    // į laikiną masyvą surašo kolekcionierius, kurie turi pašto ženklą
     for (int i = 0; i < n; i++) {
-        if (!ArTuri(K[i], zenklas)) {
+        if (K[i].pavadinimas.compare(zenklas.pavadinimas) == 0 && K[i].kiekis != 0) {
+            Temp[temp++] = K[i];
+        }
+    }
+    
+    // į naują masyvą surašo kolekcionierius, kurių nėra laikiname (turinčių ženklą) masyve
+    for (int i = 0; i < n; i++) {
+        bool yra = false;
+        for (int j = 0; j < temp; j++) {
+            if (K[i].varPav.compare(K[j].varPav) == 0) {
+                yra = true;
+                break;
+            }
+        }
+        if (!yra) {
             Naujas[m++] = K[i];
         }
     }
 }
-
-// funkcija, kuri tikrina, ar asmuo turi nurodytą pašto ženklą
-bool ArTuri(Kolekcionierius k, Zenklas zenklas) {
-    for (int i = 0; i < k.nr; i++) {
-        if (k.pavadinimas[i] == zenklas.pavadinimas) return true;
-    }
-    return false;
-} */
