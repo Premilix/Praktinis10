@@ -29,6 +29,7 @@ void SkaitytiZenklus(ifstream& in, Zenklas Z[], int &zenkluSkaicius);
 void SkaitytiKolekcionierius(ifstream& in, Kolekcionierius K[], int &kolekcionieriuSkaicius);
 void Neturintys(Kolekcionierius K[], Kolekcionierius Naujas[], int n, int &m, Zenklas zenklas);
 bool ArTuri(Kolekcionierius k, Zenklas zenklas);
+void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaicius, int kolekcionieriuSkaicius, ofstream& outX);
 
 int main()
 {
@@ -75,7 +76,27 @@ void SkaitytiKolekcionierius(ifstream& in, Kolekcionierius K[], int &kolekcionie
         in.ignore();
     }
 }
-
+void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaicius, int kolekcionieriuSkaicius, ofstream& outX)
+{
+    int x[zenkluSkaicius]; // Kiekvieno zenklo kiekis
+    int did = -1;
+    for (int i = 0; i < zenkluSkaicius; i++)
+    {
+        x[i] = 0;
+        for (int j = 0; j < kolekcionieriuSkaicius; j++)
+        {
+            if (K[j].pavadinimas == Z[i].pavadinimas) x[i] += K[j].kiekis;
+        }
+        for (int j = 0; j <= i; j++)
+        {
+            if (did < x[j]) did = x[j];
+        }
+    }
+    for (int i = 0; i < zenkluSkaicius; i++)
+    {
+        if (did == x[i]) outX << Z[i].pavadinimas << endl;
+    }
+}
 /*
 // funkcija, kuri suranda asmenis, neturinčius nurodyto pašto ženklo, ir surašo juos į naują sąrašą
 void Neturintys(Kolekcionierius K[], Kolekcionierius Naujas[], int n, int &m, Zenklas zenklas) {
