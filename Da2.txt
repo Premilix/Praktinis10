@@ -1,6 +1,6 @@
-14
+13
 Blake Mckee         Zenklas34           2
-Alonzo Donovan      Zenklas67           2
+Alonzo Donovan      Zenklas53           3
 Alonzo Donovan      Zenklas15           1
 Blake Mckee         Zenklas67           1
 Morris Little       Zenklas34           3
@@ -10,6 +10,5 @@ Alonzo Donovan      Zenklas23           3
 Blake Mckee         Zenklas53           1
 Morris Little       Zenklas67           1
 Norris Herman       Zenklas67           1
-Alonzo Donovan      Zenklas53           2
 Norris Herman       Zenklas53           1
 Blake Mckee         Zenklas23           2
