@@ -1,13 +1,5 @@
 #include <bits/stdc++.h>
 
-// duomenu sukurimas (Haroldas)
-// ivedimas is failo (Haroldas)
-// pradiniai i faila (Motiejus)
-// rezultatai i faila (Motiejus)
-// populiariausių pašto ženklų sąrašo be pasikartojimų funkciją (Augustas)
-// funkcija, kuri suranda asmenis, neturinčius nurodyto pašto ženklo, ir surašo juos į naują sąrašą. (Emilis)
-// rikiavimas (Augustas)
-
 using namespace std;
 
 struct Zenklas
@@ -29,7 +21,7 @@ void SkaitytiZenklus(ifstream& in, Zenklas Z[], int &zenkluSkaicius);
 void SkaitytiKolekcionierius(ifstream& in, Kolekcionierius K[], int &kolekcionieriuSkaicius);
 void Neturintys(Kolekcionierius K[], Kolekcionierius Naujas[], int n, int &m, Zenklas zenklas);
 void Rikiuoti(Kolekcionierius X[], int m);
-void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaicius, int kolekcionieriuSkaicius, ofstream& outX);
+void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaicius, int kolekcionieriuSkaicius, Zenklas Naujas[], int &k);
 void PradiniaiIFaila(ofstream& out, Zenklas Z[], int zenkluSkaicius, Kolekcionierius K[], int kolekcionieriuSkaicius);
 void RezultataiIFaila(ofstream& outX, Zenklas Z[], int zenkluSkaicius, Kolekcionierius K[], int kolekcionieriuSkaicius);
 
@@ -39,8 +31,7 @@ int main()
     Kolekcionierius K[100];
     ifstream inZ("DuomenysZ.txt");
     ifstream inK("DuomenysK.txt");
-    ofstream out("Pradiniai.txt");
-    ofstream outX("Rezultatai.txt");
+    ofstream out("Rezultatai.txt");
 
     int zenkluSkaicius;
     int kolekcionieriuSkaicius;
@@ -48,7 +39,7 @@ int main()
     SkaitytiZenklus(inZ, Z, zenkluSkaicius);
     SkaitytiKolekcionierius(inK, K, kolekcionieriuSkaicius);
     PradiniaiIFaila(out, Z, zenkluSkaicius, K, kolekcionieriuSkaicius);
-    RezultataiIFaila(outX, Z, zenkluSkaicius, K, kolekcionieriuSkaicius);
+    RezultataiIFaila(out, Z, zenkluSkaicius, K, kolekcionieriuSkaicius);
 }
 
 void SkaitytiZenklus(ifstream& in, Zenklas Z[], int &zenkluSkaicius) {
@@ -95,26 +86,48 @@ void PradiniaiIFaila(ofstream& out, Zenklas Z[], int zenkluSkaicius, Kolekcionie
 
 
     out << "\nD2 duomenys\n";
-    out << "Vardas, pavardė      Kiekis\n";
+    out << "Vardas, pavardė      Pavadinimas          Kiekis\n";
     for (int i = 0; i < kolekcionieriuSkaicius; ++i) {
         out << left << setw(20) << K[i].varPav << " ";
         out << left << setw(20) << K[i].pavadinimas << " ";
         out << K[i].kiekis << "\n";
     }
+
+    out << endl << endl;
 }
 
 void RezultataiIFaila(ofstream& outX, Zenklas Z[], int zenkluSkaicius, Kolekcionierius K[], int kolekcionieriuSkaicius){
     outX<<"Rezultatai:\n";
     outX<<"Populiariausi ženklai \n";
-    PopuliariausiPastoZenklai(Z, K, zenkluSkaicius, kolekcionieriuSkaicius, outX);
 
-    Kolekcionierius NeturinysPop[100];
-    int neturintysPopCount = 0;
-    Neturintys(K, NeturinysPop, kolekcionieriuSkaicius, neturintysPopCount, Z[1]);
-    for (int i = 0; i < neturintysPopCount; i++) {
-        outX << left << setw(20) << NeturinysPop[i].varPav << " ";
-        outX << left << setw(20) << NeturinysPop[i].pavadinimas << " ";
-        outX << NeturinysPop[i].kiekis << "\n";
+    Zenklas Populiariausi[100];
+    int k; // populiariausiu zenklu kiekis
+    PopuliariausiPastoZenklai(Z, K, zenkluSkaicius, kolekcionieriuSkaicius, Populiariausi, k);
+
+    for (int i = 0; i < k; i++) {
+        outX << left << setw(20) << Populiariausi[i].pavadinimas << " \n";
+    }
+    outX << endl;
+
+
+    for (int i = 0; i < k; i++) {
+        Kolekcionierius NeturinysPop[100];
+        int neturintysPopCount = 0;
+        Neturintys(K, NeturinysPop, kolekcionieriuSkaicius, neturintysPopCount, Populiariausi[i]);
+
+        if (neturintysPopCount == 0) {
+            outX << "Ženklą " << Populiariausi[i].pavadinimas << " turi visi kolekcionieriai.\n" << endl;
+        }
+
+
+        else {
+            Rikiuoti(NeturinysPop, neturintysPopCount);
+            outX << "Ženklo " << Populiariausi[i].pavadinimas << " neturi kolekcionieriai:\n";
+            for (int i = 0; i < neturintysPopCount; i++) {
+                outX << left << setw(20) << NeturinysPop[i].varPav << " " << endl;
+            }
+            outX << endl;
+        }
     }
 
 }
@@ -140,7 +153,7 @@ void Rikiuoti(Kolekcionierius X[], int m)
     }
 }
 
-void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaicius, int kolekcionieriuSkaicius, ofstream& outX)
+void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaicius, int kolekcionieriuSkaicius, Zenklas Populiariausi[], int &k)
 {
     int x[zenkluSkaicius]; // Kiekvieno zenklo kiekis
     int did = -1;
@@ -155,9 +168,13 @@ void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaic
         if (x[i] > did) did = x[i];
     }
 
+    k = 0;
     for (int i = 0; i < zenkluSkaicius; i++)
     {
-        if (did == x[i]) outX << Z[i].pavadinimas << endl;
+        if (did == x[i])
+        {
+            Populiariausi[k++] = Z[i];
+        }
     }
 }
 
@@ -174,18 +191,26 @@ void Neturintys(Kolekcionierius K[], Kolekcionierius Naujas[], int n, int &m, Ze
         }
     }
 
-    // į naują masyvą surašo kolekcionierius, kurių nėra laikiname (turinčių ženklą) masyve
+    // į naują masyvą surašo kolekcionierius, kurių nėra laikiname (turinčių ženklą) masyve bei naujame masyve (nėra pasikartojančių)
     for (int i = 0; i < n; i++) {
         bool yra = false;
         for (int j = 0; j < temp; j++) {
-            if (K[i].varPav.compare(K[j].varPav) == 0) {
+            if (K[i].varPav == Temp[j].varPav) {
                 yra = true;
                 break;
             }
         }
+
+        for (int k = 0; k < m; k++) {
+            if (K[i].varPav == Naujas[k].varPav) {
+                yra = true;
+                break;
+            }
+        }
+
         if (!yra) {
             Naujas[m++] = K[i];
         }
-        
+
     }
 }
