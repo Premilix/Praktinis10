@@ -3,3 +3,5 @@ Augustas: rikiavimo, populiariausių pašto ženklų radimo funkcijos
 Emilis: duomenų skaitymas į failą, neturinčių nurodyto pašto ženklo surašymas į naują masyvą funkcija
 Haroldas: pradiniai duomenys, visi variantai
 Motiejus: pradinių duomenų bei rezultatų spausdinimo į failą funkcijos
+
+GitHub repository: https://github.com/Premilix/Praktinis10/tree/main
