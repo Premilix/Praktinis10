@@ -1,0 +1,5 @@
+Kartu: struktūros, atskirų dalių įdėjimas į pagrindinį programos failą, programos koregavimas
+Augustas: rikiavimo, populiariausių pašto ženklų radimo funkcijos
+Emilis: duomenų skaitymas į failą, neturinčių nurodyto pašto ženklo surašymas į naują masyvą funkcija
+Haroldas: pradiniai duomenys, visi variantai
+Motiejus: pradinių duomenų bei rezultatų spausdinimo į failą funkcijos
