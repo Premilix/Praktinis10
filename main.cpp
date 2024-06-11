@@ -29,7 +29,7 @@ void SkaitytiZenklus(ifstream& in, Zenklas Z[], int &zenkluSkaicius);
 void SkaitytiKolekcionierius(ifstream& in, Kolekcionierius K[], int &kolekcionieriuSkaicius);
 void Neturintys(Kolekcionierius K[], Kolekcionierius Naujas[], int n, int &m, Zenklas zenklas);
 void Rikiuoti(Kolekcionierius X[], int m);
-void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaicius, int kolekcionieriuSkaicius, ofstream& outX);
+void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaicius, int kolekcionieriuSkaicius, Zenklas Naujas[], int &k);
 void PradiniaiIFaila(ofstream& out, Zenklas Z[], int zenkluSkaicius, Kolekcionierius K[], int kolekcionieriuSkaicius);
 void RezultataiIFaila(ofstream& outX, Zenklas Z[], int zenkluSkaicius, Kolekcionierius K[], int kolekcionieriuSkaicius);
 
@@ -140,7 +140,7 @@ void Rikiuoti(Kolekcionierius X[], int m)
     }
 }
 
-void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaicius, int kolekcionieriuSkaicius, ofstream& outX)
+void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaicius, int kolekcionieriuSkaicius, Zenklas Populiariausi[], int &k)
 {
     int x[zenkluSkaicius]; // Kiekvieno zenklo kiekis
     int did = -1;
@@ -154,10 +154,14 @@ void PopuliariausiPastoZenklai(Zenklas Z[], Kolekcionierius K[], int zenkluSkaic
 
         if (x[i] > did) did = x[i];
     }
-
+    k = 0;
     for (int i = 0; i < zenkluSkaicius; i++)
     {
-        if (did == x[i]) outX << Z[i].pavadinimas << endl;
+        if (did == x[i])
+        {
+            Populiariausi[k] = Z[i];
+            k++;
+        }
     }
 }
 
